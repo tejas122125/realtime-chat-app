@@ -44,7 +44,7 @@ import (
 	"context"
 	"fmt"
 	"log"
-	"os"
+	// "os"
 	"time"
 
 	"github.com/joho/godotenv"
@@ -58,7 +58,8 @@ func GetDatabase() *mongo.Client {
 	if err != nil {
 		log.Println("error while loading .env file in go")
 	}
-	mongoDb := os.Getenv("MONGODB_URL")
+	// mongoDb := os.Getenv("MONGODB_URL")
+	const mongoDb = "clsahdgdufbj"
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*10)
 	defer cancel()
 	client, err := mongo.Connect(ctx, options.Client().ApplyURI(mongoDb))

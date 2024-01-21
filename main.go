@@ -3,7 +3,7 @@ package main
 import (
 	"chatting/server/authentication"
 	"chatting/server/ws"
-	"chatting/server/appwrite"
+	// "chatting/server/authentication"
 
 	// "os"
 
@@ -31,8 +31,8 @@ func initRouters(wshandler *ws.Handler) {
 // authentication routes
  authenticate.Use(authentication.AuthenticationMiddleware)
 authenticate.HandleFunc("/checksignin",authentication.HandleCheckSignin).Methods("POST")
-r.HandleFunc("/signin",authentication.Signin)
-
+r.HandleFunc("/signin",authentication.Signin).Methods("POST")
+r.HandleFunc("/signup",authentication.Signup).Methods("POST")
 
 // r.HandleFunc("/redirect",func(w http.ResponseWriter, r *http.Request) {
 // 	// json.NewEncoder(w).Encode(message{name: "tejaswee",lastname: "singh"})
@@ -58,10 +58,10 @@ r.HandleFunc("/ws/createroom",wshandler.CreateRoom)
 func main() {
 	// get:=os.Getenv("APPWRITE_PROJECT_ID")
 	fmt.Println("get")
-appwrite.Setup()
-	// h := ws.NewHub()
-	// wshandler := ws.NewHandler(h)
-	// go h.Run()
-	// initRouters(wshandler)
+// authentication.Setup()
+	h := ws.NewHub()
+	wshandler := ws.NewHandler(h)
+	go h.Run()
+	initRouters(wshandler)
 
 }

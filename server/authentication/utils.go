@@ -14,7 +14,6 @@ import (
 )
 
 func GetUserById(userid string)(*mongo.SingleResult) {
-
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*10)
 	defer cancel()
 	client := GetDatabase()
@@ -38,10 +37,9 @@ func SaveUserToDatabase(userrdetails types.UserToDb) (*mongo.InsertOneResult, er
 		fmt.Println("error while saving user to database")
 		return res, err
 	}
-
 	return res, nil
-
 }
+
 func GetUserByEmail(user UserSigin) *mongo.SingleResult {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*10)
 	defer cancel()
