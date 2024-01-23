@@ -9,8 +9,8 @@ const Inside = () => {
   <AvatarImage src="https://github.com/shadcn.png"/>
                 <AvatarFallback><VscAccount /></AvatarFallback>
             </Avatar>
-    <div className='flex flex-col w-full h-fit gap-2 p-2 bg-gray-600'>
-        <li className='bg-gray-400'>name</li>
+    <div className='flex flex-col w-full h-fit gap-2 p-2 '>
+        <li className=''>name</li>
         <li>class</li>
     </div>
 </div>

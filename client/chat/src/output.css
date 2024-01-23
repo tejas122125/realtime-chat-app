@@ -576,8 +576,24 @@ body {
   --tw-backdrop-sepia:  ;
 }
 
+.fixed {
+  position: fixed;
+}
+
+.absolute {
+  position: absolute;
+}
+
 .relative {
   position: relative;
+}
+
+.left-2 {
+  left: 0.5rem;
+}
+
+.right-2 {
+  right: 0.5rem;
 }
 
 .top-0 {
@@ -586,6 +602,10 @@ body {
 
 .z-10 {
   z-index: 10;
+}
+
+.m-4 {
+  margin: 1rem;
 }
 
 .mb-4 {
@@ -635,6 +655,10 @@ body {
 
 .h-screen {
   height: 100vh;
+}
+
+.max-h-full {
+  max-height: 100%;
 }
 
 .min-h-fit {
@@ -695,8 +719,20 @@ body {
   gap: 1rem;
 }
 
+.self-start {
+  align-self: flex-start;
+}
+
+.self-end {
+  align-self: flex-end;
+}
+
 .overflow-hidden {
   overflow: hidden;
+}
+
+.overflow-y-scroll {
+  overflow-y: scroll;
 }
 
 .whitespace-nowrap {
@@ -715,8 +751,21 @@ body {
   border-radius: calc(var(--radius) - 2px);
 }
 
+.rounded-r-md {
+  border-top-right-radius: calc(var(--radius) - 2px);
+  border-bottom-right-radius: calc(var(--radius) - 2px);
+}
+
+.rounded-br-none {
+  border-bottom-right-radius: 0px;
+}
+
 .border {
   border-width: 1px;
+}
+
+.border-2 {
+  border-width: 2px;
 }
 
 .border-input {
@@ -742,6 +791,16 @@ body {
   background-color: rgb(187 247 208 / var(--tw-bg-opacity));
 }
 
+.bg-green-300 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(134 239 172 / var(--tw-bg-opacity));
+}
+
+.bg-green-400 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(74 222 128 / var(--tw-bg-opacity));
+}
+
 .bg-muted {
   background-color: hsl(var(--muted));
 }
@@ -755,6 +814,11 @@ body {
   background-color: rgb(192 132 252 / var(--tw-bg-opacity));
 }
 
+.bg-purple-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(168 85 247 / var(--tw-bg-opacity));
+}
+
 .bg-secondary {
   background-color: hsl(var(--secondary));
 }
@@ -764,14 +828,19 @@ body {
   background-color: rgb(148 163 184 / var(--tw-bg-opacity));
 }
 
-.bg-slate-500 {
+.bg-slate-700 {
   --tw-bg-opacity: 1;
-  background-color: rgb(100 116 139 / var(--tw-bg-opacity));
+  background-color: rgb(51 65 85 / var(--tw-bg-opacity));
 }
 
-.bg-green-300 {
+.bg-red-500 {
   --tw-bg-opacity: 1;
-  background-color: rgb(134 239 172 / var(--tw-bg-opacity));
+  background-color: rgb(239 68 68 / var(--tw-bg-opacity));
+}
+
+.bg-black {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
 }
 
 .p-2 {
@@ -805,10 +874,6 @@ body {
 .py-3 {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
-}
-
-.text-end {
-  text-align: end;
 }
 
 .text-sm {
