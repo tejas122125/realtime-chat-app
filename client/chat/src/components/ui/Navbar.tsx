@@ -5,7 +5,7 @@ import "../../index.css"
 
 const Navbar = () => {
     return (
-        <div className='z-10  top-0 w-full py-3 flex flex-row bg-slate-400'>
+        <div className='z-10 absolute top-0 w-full py-3 flex flex-row bg-slate-400'>
             <div className='rounded-full w-8 h-8 bg-blue-600 '></div>
 
             <nav className='flex flex-row w-full justify-evenly'>

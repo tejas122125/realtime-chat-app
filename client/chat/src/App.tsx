@@ -9,17 +9,14 @@ import './index.css'
 function App() {
 
   return (
-    <><div className='w-full min-h-fit h-screen flex  flex-col'>
+    <div className='w-screen relative h-screen  overflow-hidden flex flex-col '>
       <Navbar />
-      <div className='h-screen flex flex-row'>
+      <div className='max-h-full relative pt-16 gap-4 flex flex-row'>
         <Sidebar />
         <Body />
       </div>
 
     </div>
-
-
-    </>
   )
 }
 
