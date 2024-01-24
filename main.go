@@ -4,8 +4,8 @@ import (
 	"chatting/server/authentication"
 	"chatting/server/ws"
 	// "chatting/server/authentication"
-
-	// "os"
+    "github.com/joho/godotenv"
+	"os"
 
 	// "encoding/json"
 	"fmt"
@@ -21,29 +21,18 @@ type message struct{
 }
 func initRouters(wshandler *ws.Handler) {
 	router  :=  mux.NewRouter()
-	// router.HandleFunc("/check",func(w http.ResponseWriter, r *http.Request) {
-	// 	fmt.Println("checked")
-
-	// })
+	
 	authenticate := router.PathPrefix("/auth").Subrouter()
 	r := router.PathPrefix("/user").Subrouter()
 
 // authentication routes
  authenticate.Use(authentication.AuthenticationMiddleware)
 authenticate.HandleFunc("/checksignin",authentication.HandleCheckSignin).Methods("POST")
+
+
+
 r.HandleFunc("/signin",authentication.Signin).Methods("POST")
 r.HandleFunc("/signup",authentication.Signup).Methods("POST")
-
-// r.HandleFunc("/redirect",func(w http.ResponseWriter, r *http.Request) {
-// 	// json.NewEncoder(w).Encode(message{name: "tejaswee",lastname: "singh"})
-// 	http.Redirect(w,r,"https://www.example.com/",http.StatusAccepted)
-// })
-// // var msg message;
-// r.HandleFunc("/heredirected",func(w http.ResponseWriter, r *http.Request) {
-// 	// json.NewDecoder(r.Body).Decode(&msg)
-// 	// fmt.Println(msg)
-// 	fmt.Println("called here")
-// })
 r.HandleFunc("/ws/joinroom",wshandler.JoinRoom)
 r.HandleFunc("/ws/getrooms",wshandler.GetRooms)
 r.HandleFunc("/ws/getclients",wshandler.GetClients)
@@ -56,8 +45,13 @@ r.HandleFunc("/ws/createroom",wshandler.CreateRoom)
 }
 
 func main() {
-	// get:=os.Getenv("APPWRITE_PROJECT_ID")
-	fmt.Println("get")
+	err := godotenv.Load()
+	if err != nil {
+        fmt.Println("Error loading .env file")
+        return
+    }
+	get:=os.Getenv("MONGO_URL")
+	fmt.Println(get,"vgdcgfcgfdcgf")
 // authentication.Setup()
 	h := ws.NewHub()
 	wshandler := ws.NewHandler(h)

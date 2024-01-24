@@ -31,7 +31,7 @@ func SaveUserToDatabase(userrdetails types.UserToDb) (*mongo.InsertOneResult, er
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*10)
 	defer cancel()
 	client := GetDatabase()
-	collection := OpenCollection(client, "user")
+	collection := OpenCollection(client, "users")
 	res, err := collection.InsertOne(ctx, userrdetails)
 	if err != nil {
 		fmt.Println("error while saving user to database")
@@ -40,12 +40,19 @@ func SaveUserToDatabase(userrdetails types.UserToDb) (*mongo.InsertOneResult, er
 	return res, nil
 }
 
-func GetUserByEmail(user UserSigin) *mongo.SingleResult {
+func GetUserByEmail(user UserSigin) *types.Userfromdb {
+	var users types.Userfromdb;
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*10)
 	defer cancel()
 	client := GetDatabase()
-	collection := OpenCollection(client, "user")
+	collection := OpenCollection(client, "users")
 	signeduser := collection.FindOne(ctx,bson.D{{Key: "email",Value: user.Email}})
-	return signeduser
+	err := signeduser.Decode(&users)
+	if err == mongo.ErrNoDocuments{
+		fmt.Println("nodocuments")
+		return nil
+	}
+	fmt.Println(users)
+	return &users
 }
 

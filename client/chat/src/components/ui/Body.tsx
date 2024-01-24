@@ -1,5 +1,8 @@
 import React from 'react'       
 import Inside from './Inside'
+import { VscDebugStart } from "react-icons/vsc";
+import { Textarea } from "@/components/ui/textarea"
+
 import { TfiViewList } from 'react-icons/tfi'
 
 const Body = () => {
@@ -21,7 +24,7 @@ const Body = () => {
             
             
         </div>
-        <div className='bg-red-500 m-4 p-4'>hdvbfhvbfhgf</div>
+        <div className='flex bg-slate-700 flex-row items-center  p-4'><Textarea  /><VscDebugStart  className='w-16 h-16 hover:bg-green-400'/></div>
         
     </div>
   )

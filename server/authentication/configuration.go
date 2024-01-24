@@ -39,11 +39,12 @@ package authentication
 //		fmt.Println("documentis",document)
 //	}
 
-
 import (
 	"context"
 	"fmt"
 	"log"
+
+
 	// "os"
 	"time"
 
@@ -59,12 +60,13 @@ func GetDatabase() *mongo.Client {
 		log.Println("error while loading .env file in go")
 	}
 	// mongoDb := os.Getenv("MONGODB_URL")
-	const mongoDb = "clsahdgdufbj"
+	const mongoDb = "mongodb+srv://tejasweekumarsingh:o8rftH6R1GMs0YW1@tejas.tokgflw.mongodb.net"
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*10)
 	defer cancel()
 	client, err := mongo.Connect(ctx, options.Client().ApplyURI(mongoDb))
 	if err != nil {
-		log.Println("mongo error")
+		log.Println("mongo error",err)
+		return nil
 	}
 	fmt.Println("mongo connection successful")
 	return client
@@ -72,7 +74,7 @@ func GetDatabase() *mongo.Client {
 }
 func OpenCollection (client *mongo.Client,collectionName string )*mongo.Collection{
 
-
-	var collection *mongo.Collection = client.Database("cluster0").Collection(collectionName)
+fmt.Println("collection goot successfully")
+	var collection *mongo.Collection = client.Database("chatapp").Collection(collectionName)
 	return collection
 }

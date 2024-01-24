@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+
 	// "go/token"
 	"time"
 
@@ -12,8 +13,10 @@ import (
 	// "log"
 	// "github.com/joho/godotenv"
 
-	"github.com/dgrijalva/jwt-go"
 	"net/http"
+
+	"github.com/dgrijalva/jwt-go"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 //	type Jwt struct {
@@ -109,48 +112,10 @@ func AuthenticationMiddleware(next http.Handler) http.Handler {
 		w.Header().Set("Content-Type", "application/json")
 		token,err :=  Validatetoken(jwt_token)
 		if err != nil{
-			json.NewEncoder(w).Encode(err)
+			json.NewEncoder(w).Encode(errors.New(err.Error()))
 			return
 		}
 		json.NewEncoder(w).Encode(token)
-		// body, err := io.ReadAll(r.Body)
-// 		if body == "" {
-// 			err := errors{Error: "errror while gettin token from user"}
-// 			jsonData, _ := json.Marshal(err)
-// 			log.Println("error wwhile reading from request body")
-// 			w.WriteHeader(http.StatusBadRequest)
-// 			w.Write(jsonData)
-// 			return
-// 		}
-// err != nil {
-// 			err := errors{Error: "error while getting token from user"}
-// 			jsonData, _ := json.Marshal(err)
-// 			log.Println("error wwhile reading from request body")
-// 			w.WriteHeader(http.StatusBadRequest)
-// 			w.Write(jsonData)
-// 			return
-
-// 		}
-// 		claims, ok := token.Claims.(*Claims)
-// 		if !ok {
-// 			err := errors{Error: "error while getting token from user"}
-// 			jsonData, _ := json.Marshal(err)
-// 			log.Println("error wwhile reading from request body")
-// 			w.WriteHeader(http.StatusBadRequest)
-// 			w.Write(jsonData)
-// 			return
-// 		}
-// 		if claims.ExpiresAt < time.Now().Local().Unix() {
-// 			err := errors{Error: "error while getting token from user"}
-// 			jsonData, _ := json.Marshal(err)
-// 			log.Println("error wwhile reading from request body")
-// 			w.WriteHeader(http.StatusBadRequest)
-// 			w.Write(jsonData)
-// 			return
-// 		}
-		// jsonData, _ := json.Marshal(claims)
-		// w.WriteHeader(http.StatusBadRequest)
-		// w.Write(jsonData)
 		fmt.Println("middle ware called")
 		next.ServeHTTP(w, r)
 	})
@@ -170,12 +135,17 @@ func Signin(w http.ResponseWriter, r *http.Request) {
 	var newuser UserSigin
 	json.NewDecoder(r.Body).Decode(&newuser)
 	// data base check up
+	fmt.Println(newuser.Email)
+	fmt.Println(r.Body)
+
 	res := GetUserByEmail(newuser)
 
 	if res == nil {
 		fmt.Println("user not found")
 		json.NewEncoder(w).Encode(errors.New("user not found in  documents"))
 	}
+	fmt.Println(res)
+	// fmt.Fprintln(w,res)
 	json.NewEncoder(w).Encode(res)
 
 }
@@ -192,10 +162,13 @@ func Signup(w http.ResponseWriter, r *http.Request) {
 		return
 
 	}
+	insertedID := res.InsertedID.(primitive.ObjectID)
 
-	newtoken,err := generatejwttoken(res.InsertedID.(string))
-	// newtoken,err := generatejwttoken("12232")
-fmt.Println(err)
+	// Convert ObjectID to string
+	insertedIDString := insertedID.Hex()
+	fmt.Println(insertedIDString,"rtjggjgjhre")
+	newtoken,err := generatejwttoken(insertedIDString)
+    
 
 	if err != nil {
 		fmt.Println("error while getting neew token")
@@ -210,7 +183,7 @@ fmt.Println(err)
 	}
 
 	http.SetCookie(w, &cookie)
-	var mongoresult ClaimRes = ClaimRes{UserId: res.InsertedID.(string)}
+	var mongoresult ClaimRes = ClaimRes{UserId: insertedIDString}
 	json.NewEncoder(w).Encode(mongoresult)
 }
 
