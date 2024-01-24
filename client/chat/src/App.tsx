@@ -1,22 +1,18 @@
-
-import Body from './components/ui/Body'
-import Inside from './components/ui/Inside'
-import Navbar from './components/ui/Navbar'
-import { Button } from './components/ui/button'
-import Sidebar from './components/ui/Sidebar'
 import './index.css'
-
-function App() {
+import { Route, Routes } from "react-router-dom";
+import Login from './pages/Login'
+import Home from './pages/Home'
+const App =()=> {
 
   return (
-    <div className='w-screen relative h-screen  overflow-hidden flex flex-col '>
-      <Navbar />
-      <div className='max-h-full relative pt-16 gap-4 flex flex-row'>
-        <Sidebar />
-        <Body />
-      </div>
+    <main className='w-screen relative h-screen  overflow-hidden flex flex-col '>
+      <Routes>
+        <Route path="/signin" element={<Login />} />
+        {/* <Route path="/" element={<Home />} /> */}
+        <Route path='/' element={<Home/>}/>
 
-    </div>
+      </Routes>
+    </main>
   )
 }
 
