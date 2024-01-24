@@ -1,10 +1,11 @@
 import React from 'react'       
 import Inside from './Inside'
+import { TfiViewList } from 'react-icons/tfi'
 
 const Body = () => {
   return (
     <div className='w-full max-h-full flex 
-     flex-col bg-black'>
+     flex-col realtive '><TfiViewList className=' absolute top-16 z-10 md:hidden w-10 h-10' />
         <Inside/>
         <div className='bg-slate-700 h-full
          overflow-y-scroll scroll-smooth

@@ -616,12 +616,20 @@ body {
   margin-top: 1rem;
 }
 
+.ml-2 {
+  margin-left: 0.5rem;
+}
+
 .flex {
   display: flex;
 }
 
 .inline-flex {
   display: inline-flex;
+}
+
+.hidden {
+  display: none;
 }
 
 .aspect-square {
@@ -634,6 +642,10 @@ body {
 
 .h-11 {
   height: 2.75rem;
+}
+
+.h-16 {
+  height: 4rem;
 }
 
 .h-8 {
@@ -665,6 +677,10 @@ body {
   width: 2.5rem;
 }
 
+.w-16 {
+  width: 4rem;
+}
+
 .w-8 {
   width: 2rem;
 }
@@ -682,16 +698,17 @@ body {
   width: 100vw;
 }
 
+.min-w-\[200px\] {
+  min-width: 200px;
+}
+
+.max-w-fit {
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+}
+
 .flex-1 {
   flex: 1 1 0%;
-}
-
-.flex-auto {
-  flex: 1 1 auto;
-}
-
-.flex-shrink {
-  flex-shrink: 1;
 }
 
 .shrink-0 {
@@ -736,10 +753,6 @@ body {
 
 .self-end {
   align-self: flex-end;
-}
-
-.overflow-auto {
-  overflow: auto;
 }
 
 .overflow-hidden {
@@ -798,11 +811,6 @@ body {
 
 .bg-background {
   background-color: hsl(var(--background));
-}
-
-.bg-black {
-  --tw-bg-opacity: 1;
-  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
 }
 
 .bg-blue-600 {
@@ -897,6 +905,10 @@ body {
 
 .pt-16 {
   padding-top: 4rem;
+}
+
+.pl-5 {
+  padding-left: 1.25rem;
 }
 
 .text-sm {
@@ -1014,4 +1026,14 @@ body {
 
 .disabled\:opacity-50:disabled {
   opacity: 0.5;
+}
+
+@media (min-width: 768px) {
+  .md\:flex {
+    display: flex;
+  }
+
+  .md\:hidden {
+    display: none;
+  }
 }
